@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-StaffUI"
+    }
+  },
+  "defaultProject": "angular-StaffUI",
+  "cli": {
+    "analytics": false
+  }
 }
