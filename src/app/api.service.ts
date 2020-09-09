@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Staff } from '../model/staff';
 
 
 @Injectable({
@@ -13,12 +14,12 @@ export class ApiService {
 
   private apiurl = "https://localhost:8001/Staff";
 
-  getStaffs(staffType: string): Observable<any> {
-    const url = `${this.apiurl}/?type=${staffType}`
-    return this.http.get<any>(url)
+  getStaffs(staffType: string): Observable<Staff[]> {
+    const url = `${this.apiurl}/?type=${staffType}`;
+    return this.http.get<Staff[]>(url)
       .pipe(
-        tap(val => console.log('fetched')),
-        catchError(this.handleError<any>('get Staff'))
+        tap(_ => console.log('fetched')),
+        catchError(this.handleError<Staff[]>('get Staff'))
 
       );
   }

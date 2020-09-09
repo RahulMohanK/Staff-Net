@@ -1,0 +1,40 @@
+<br>
+<div>
+  <form name="myForm">
+    <label for="StaffSelect"> Select Staff : </label>
+    <select name="StaffStaff" (click)="getStaffType($event)">
+      <option value=" admin">Administrative Staff</option>
+      <option value="teaching">Teaching Staff</option>
+      <option value="support">Supporting Staff</option>
+    </select>
+    <button>Load</button>
+  </form>
+</div>
+
+<hr><br><br>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let header of headers">
+          {{header}}
+        </th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="staffs">
+      <tr *ngFor="let val of staffs ; let i = index ">
+        <td>{{i+1}}</td>
+        <td>{{val.empId}}</td>
+        <td>{{val.name}}</td>
+        <td>{{val.phone}}</td>
+        <td>{{val.email}}</td>
+        <td>{{val.dob}}</td>
+        <td>{{val.administrativeStaff[0].designation}}</td>
+
+
+      </tr>
+    </tbody>
+  </table>
+</div>

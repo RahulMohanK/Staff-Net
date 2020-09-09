@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
+
 
 @Component({
   selector: 'app-menu',
@@ -8,15 +8,12 @@ import { ApiService } from '../api.service';
 })
 export class MenuComponent implements OnInit {
 
-  staffs = [];
-  constructor(private apiService: ApiService) { }
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.loadStaffs();
+
+
   }
 
-  loadStaffs(): void {
-    this.apiService.getStaffs('admin').subscribe(staff => this.staffs.push(staff));
-    console.log(this.staffs);
-  }
 }
