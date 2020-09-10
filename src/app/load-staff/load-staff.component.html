@@ -1,17 +1,21 @@
 <br>
-<div>
-  <form name="myForm">
+<div class="staff-head" align="center">
+  <h1 [innerHTML]="staffHeading"></h1>
+  <form name="myForm" (ngSubmit)="getStaffType()">
     <label for="StaffSelect"> Select Staff : </label>
-    <select name="StaffStaff" (click)="getStaffType($event)">
-      <option value=" admin">Administrative Staff</option>
+    <select name="StaffStaff" [(ngModel)]="staffType">
+      <option value="admin">Administrative Staff</option>
       <option value="teaching">Teaching Staff</option>
       <option value="support">Supporting Staff</option>
     </select>
 
+    <button type="submit">Load</button>
   </form>
-</div>
 
-<hr><br><br>
+</div>
+<br>
+
+<hr><br><br><br>
 
 <div>
   <table>
@@ -32,9 +36,9 @@
         <td>{{val.email}}</td>
         <td>{{val.dob}}</td>
         <td>{{val.administrativeStaff[0].designation}}</td>
-
-
       </tr>
     </tbody>
+
+
   </table>
 </div>

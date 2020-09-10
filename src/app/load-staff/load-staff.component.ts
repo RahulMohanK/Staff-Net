@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Staff } from '../../model/staff';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-load-staff',
@@ -12,34 +13,43 @@ export class LoadStaffComponent implements OnInit {
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.loadStaffs(this.staffType);
-
+    this.loadStaffs('admin');
+    this.staffHeading = 'Administrative Staff'
+    this.staffType = 'admin';
   }
 
   staffs: Staff[];
   staff: Staff;
-  staffType: string = 'admin';
+  staffType: string;
   headers = ["Sl.No", "EmpId", "Name", "Phone", "Email", "Dob", "Designation"];
-
+  staffHeading: string;
 
   loadStaffs(staffType: string): void {
     this.apiService.getStaffs(staffType).subscribe(staffs => this.staffs = staffs);
   }
 
-  getStaffType(event): void {
-    this.staffType = event.target.value;
+  getStaffType(): void {
+    console.log(this.staffType);
+
     if (this.staffType == 'admin') {
       this.headers = ["Sl.No", "EmpId", "Name", "Phone", "Email", "Dob", "Designation"];
+      this.staffHeading = 'Administrative Staff'
+
     }
-    else if (this.staffType == 'teaching') {
+    if (this.staffType == 'teaching') {
       this.headers = ["Sl.No", "EmpId", "Name", "Phone", "Email", "Dob", "Subject"];
+      this.staffHeading = 'Teaching Staff'
+
     }
-    else {
+    if (this.staffType == 'support') {
       this.headers = ["Sl.No", "EmpId", "Name", "Phone", "Email", "Dob", "Department"];
+      this.staffHeading = 'Supporting Staff'
+
     }
 
     this.loadStaffs(this.staffType);
-    // console.log(this.staffType);
+
+
   }
 
 }
