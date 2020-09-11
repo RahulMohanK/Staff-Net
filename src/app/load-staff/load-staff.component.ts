@@ -13,9 +13,10 @@ export class LoadStaffComponent implements OnInit {
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.loadStaffs('admin');
-    this.staffHeading = 'Administrative Staff'
+    this.staffHeading = 'Administrative Staff';
     this.staffType = 'admin';
+    this.type = 'admin';
+    this.loadStaffs(this.type);
   }
 
   staffs: Staff[];
@@ -23,33 +24,38 @@ export class LoadStaffComponent implements OnInit {
   staffType: string;
   headers = ["Sl.No", "EmpId", "Name", "Phone", "Email", "Dob", "Designation"];
   staffHeading: string;
+  type: string;
 
   loadStaffs(staffType: string): void {
     this.apiService.getStaffs(staffType).subscribe(staffs => this.staffs = staffs);
   }
 
-  getStaffType(): void {
-    console.log(this.staffType);
+  getStaffType(type: string): void {
 
-    if (this.staffType == 'admin') {
+    this.type = type;
+
+    if (type == 'admin') {
+      this.staffs = [];
       this.headers = ["Sl.No", "EmpId", "Name", "Phone", "Email", "Dob", "Designation"];
-      this.staffHeading = 'Administrative Staff'
-
+      this.staffHeading = 'Administrative Staff';
     }
-    if (this.staffType == 'teaching') {
+    if (type == 'teaching') {
+      this.staffs = [];
+
       this.headers = ["Sl.No", "EmpId", "Name", "Phone", "Email", "Dob", "Subject"];
-      this.staffHeading = 'Teaching Staff'
+      this.staffHeading = 'Teaching Staff';
+
+      console.log(this.staffs);
+
 
     }
-    if (this.staffType == 'support') {
+    if (type == 'support') {
+      this.staffs = [];
       this.headers = ["Sl.No", "EmpId", "Name", "Phone", "Email", "Dob", "Department"];
-      this.staffHeading = 'Supporting Staff'
+      this.staffHeading = 'Supporting Staff';
 
     }
-
-    this.loadStaffs(this.staffType);
-
-
+    this.loadStaffs(type);
   }
 
 }

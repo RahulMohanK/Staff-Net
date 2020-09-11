@@ -1,7 +1,8 @@
 <br>
+<br>
 <div class="staff-head" align="center">
   <h1 [innerHTML]="staffHeading"></h1>
-  <form name="myForm" (ngSubmit)="getStaffType()">
+  <form name="myForm" (ngSubmit)="getStaffType(staffType)">
     <label for="StaffSelect"> Select Staff : </label>
     <select name="StaffStaff" [(ngModel)]="staffType">
       <option value="admin">Administrative Staff</option>
@@ -27,7 +28,7 @@
       </tr>
     </thead>
 
-    <tbody *ngIf="staffs">
+    <tbody *ngIf="type == 'admin' ">
       <tr *ngFor="let val of staffs ; let i = index ">
         <td>{{i+1}}</td>
         <td>{{val.empId}}</td>
@@ -38,7 +39,27 @@
         <td>{{val.administrativeStaff[0].designation}}</td>
       </tr>
     </tbody>
-
-
+    <tbody *ngIf="type == 'teaching'">
+      <tr *ngFor="let val1 of staffs ; let i = index ">
+        <td>{{i+1}}</td>
+        <td>{{val1.empId}}</td>
+        <td>{{val1.name}}</td>
+        <td>{{val1.phone}}</td>
+        <td>{{val1.email}}</td>
+        <td>{{val1.dob}}</td>
+        <td>{{val1.teachingStaff[0].subject}}</td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="type == 'support'">
+      <tr *ngFor="let val1 of staffs ; let i = index ">
+        <td>{{i+1}}</td>
+        <td>{{val1.empId}}</td>
+        <td>{{val1.name}}</td>
+        <td>{{val1.phone}}</td>
+        <td>{{val1.email}}</td>
+        <td>{{val1.dob}}</td>
+        <td>{{val1.supportingStaff[0].department}}</td>
+      </tr>
+    </tbody>
   </table>
 </div>

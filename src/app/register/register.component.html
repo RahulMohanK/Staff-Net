@@ -1,0 +1,43 @@
+<div class="main">
+  <div [style.align]>
+    <h1 id="hReg">REGISTER</h1>
+    <select id="Staff" [(ngModel)]="staffType" [ngModelOptions]="{standalone: true}"><br><br>
+      <option value="admin">Administrative Staff</option>
+      <option value="teaching">Teaching Staff</option>
+      <option value="support">Supporting Staff</option>
+    </select>
+  </div>
+  <hr>
+  <br>
+  <form>
+    <label>Employee Id :</label><br>
+    <input type="text" id="IEmpId" [(ngModel)]="EmpId" [ngModelOptions]="{standalone :true}" /><br><br>
+    <label>Name :</label><br>
+    <input type="text" id="IName" [(ngModel)]="Name" [ngModelOptions]="{standalone :true}" /><br><br>
+    <label>Email :</label><br>
+    <input type="text" id="IEmail" [(ngModel)]="Email" [ngModelOptions]="{standalone :true}" /><br><br>
+    <label>Phone :</label><br>
+    <input type="text" id="IPhone" [(ngModel)]="Phone" [ngModelOptions]="{standalone :true}" /><br><br>
+    <label>Date of Birth :</label><br>
+    <input type="date" id="IDob" [(ngModel)]="Dob" [ngModelOptions]="{standalone :true}" /><br><br>
+
+
+    <div id=" SpecificFields">
+      <label id="LDesignation" *ngIf="staffType == 'admin'">Designation :</label>
+      <input type="text" id="IDesignation" *ngIf="staffType == 'admin'" [(ngModel)]="Designation"
+        [ngModelOptions]="{standalone :true}" />
+      <label id="LDesignation" *ngIf="staffType == 'teaching'">Subject :</label>
+      <input type="text" id="IDesignation" *ngIf="staffType == 'teaching'" [(ngModel)]="Subject"
+        [ngModelOptions]="{standalone :true}" />
+      <label id="LDesignation" *ngIf="staffType == 'support'">Department :</label>
+      <input type="text" id="IDesignation" *ngIf="staffType == 'support'" [(ngModel)]="Department"
+        [ngModelOptions]="{standalone :true}" />
+    </div>
+    <div class="vertical-center">
+      <button type="button" (click)="getValues()" id="registerSubmit" class="registerSubmit">Submit</button><br>
+      <button type="button" (click)="EditStaff()" id="registerEdit" style="visibility: hidden;"
+        class="registerEdit">Edit</button>
+    </div>
+
+  </form>
+</div>

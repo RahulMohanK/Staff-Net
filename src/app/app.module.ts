@@ -6,13 +6,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { HttpClientModule } from '@angular/common/http';
-import { LoadStaffComponent } from './load-staff/load-staff.component'
+import { LoadStaffComponent } from './load-staff/load-staff.component';
+import { RegisterComponent } from './register/register.component';
+import { StaffSpecificDirective } from './staff-specific.directive'
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    LoadStaffComponent
+    LoadStaffComponent,
+    RegisterComponent,
+    StaffSpecificDirective
   ],
   imports: [
     BrowserModule,
