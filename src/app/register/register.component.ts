@@ -48,6 +48,26 @@ export class RegisterComponent implements OnInit {
   deleteBtnVisibility: boolean = false;
   selectEditable: boolean = true;
 
+  AddStaff(): void {
+    this.apiService.addStaff(this.staff).subscribe(_ => {
+      this.router.navigate(['/load']);
+    });
+
+  }
+
+  EditStaff(): void {
+    this.apiService.editStaff(this.empIdCheck, this.staff).subscribe(_ => {
+      this.router.navigate(['/load']);
+    });
+
+  }
+
+  DeleteStaff(): void {
+    this.apiService.deleteStaff(this.empIdCheck).subscribe(_ => {
+      this.router.navigate(['/load']);
+    });
+
+  }
   getValues(): void {
     if (this.staffType == 'admin') {
       this.staff = {
@@ -77,26 +97,6 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  AddStaff(): void {
-    this.apiService.addStaff(this.staff).subscribe(_ => {
-      this.router.navigate(['/load']);
-    });
-
-  }
-
-  EditStaff(): void {
-    this.apiService.editStaff(this.empIdCheck, this.staff).subscribe(_ => {
-      this.router.navigate(['/load']);
-    });
-
-  }
-
-  DeleteStaff(): void {
-    this.apiService.deleteStaff(this.empIdCheck).subscribe(_ => {
-      this.router.navigate(['/load']);
-    });
-
-  }
 
   checkParam(): boolean {
     this.empIdCheck = this.route.snapshot.paramMap.get('empId');

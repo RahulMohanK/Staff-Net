@@ -74,8 +74,8 @@ input[type=text], input[type=password] ,input[type=datetime], input[type=date]{
     height:720px;
     margin:auto;
     background: white;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    box-shadow: 0 0 18px rgba(0,0,0,0.2);
     padding:20px;
-    border-radius: 5px;
+    border-radius:5px;
 
   }

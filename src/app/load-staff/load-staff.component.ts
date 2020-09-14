@@ -3,6 +3,7 @@ import { ApiService } from '../api.service';
 import { Staff } from '../../model/staff';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-load-staff',
@@ -60,5 +61,6 @@ export class LoadStaffComponent implements OnInit {
     this.router.navigate(['/register/' + EmpId]);
     // console.log("clicked" + EmpId);
   }
+
 
 }

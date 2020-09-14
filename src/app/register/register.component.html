@@ -15,6 +15,7 @@
   <hr>
   <br>
   <form class="register-form">
+
     <label>Employee Id :</label><br>
     <input type="text" id="IEmpId" [(ngModel)]="EmpId" [ngModelOptions]="{standalone :true}"
       [disabled]="!selectEditable" /><br><br>
@@ -24,9 +25,8 @@
     <input type="text" id="IEmail" [(ngModel)]="Email" [ngModelOptions]="{standalone :true}" /><br><br>
     <label>Phone :</label><br>
     <input type="text" id="IPhone" [(ngModel)]="Phone" [ngModelOptions]="{standalone :true}" /><br><br>
-    <label>Date of Birth :</label><br>
+    <label>Date of Birth : {{Dob | date}}</label><br>
     <input type="date" id="IDob" [(ngModel)]="Dob" [ngModelOptions]="{standalone :true}" /><br><br>
-
 
     <div id=" SpecificFields">
       <label id="LDesignation" *ngIf="staffType == 'admin'">Designation :</label>

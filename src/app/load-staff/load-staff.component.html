@@ -35,7 +35,7 @@
         <td>{{val.name}}</td>
         <td>{{val.phone}}</td>
         <td>{{val.email}}</td>
-        <td>{{val.dob}}</td>
+        <td>{{val.dob | date}}</td>
         <td>{{val.administrativeStaff[0].designation}}</td>
       </tr>
     </tbody>
@@ -46,7 +46,7 @@
         <td>{{val1.name}}</td>
         <td>{{val1.phone}}</td>
         <td>{{val1.email}}</td>
-        <td>{{val1.dob}}</td>
+        <td>{{val1.dob |  date}}</td>
         <td>{{val1.teachingStaff[0].subject}}</td>
       </tr>
     </tbody>
@@ -57,7 +57,7 @@
         <td>{{val1.name}}</td>
         <td>{{val1.phone}}</td>
         <td>{{val1.email}}</td>
-        <td>{{val1.dob}}</td>
+        <td>{{val1.dob |  date}}</td>
         <td>{{val1.supportingStaff[0].department}}</td>
       </tr>
     </tbody>
