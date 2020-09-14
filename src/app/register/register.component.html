@@ -14,7 +14,7 @@
   </div>
   <hr>
   <br>
-  <form>
+  <form class="register-form">
     <label>Employee Id :</label><br>
     <input type="text" id="IEmpId" [(ngModel)]="EmpId" [ngModelOptions]="{standalone :true}"
       [disabled]="!selectEditable" /><br><br>
@@ -39,10 +39,10 @@
       <input type="text" id="IDesignation" *ngIf="staffType == 'support'" [(ngModel)]="Department"
         [ngModelOptions]="{standalone :true}" />
     </div>
-    <div class="vertical-center">
-      <button type="button" (click)="getValues()" id="registerSubmit" class="registerSubmit"
-        [innerHTML]="btntext"></button><br>
-    </div>
+
+    <button type="button" (click)="getValues()" id="registerSubmit" class="registerSubmit"
+      [innerHTML]="btntext"></button><br>
+
 
   </form>
 </div>
