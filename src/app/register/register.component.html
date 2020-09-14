@@ -1,17 +1,23 @@
 <div class="main" *ngIf="staffType">
   <div align="center">
     <h1 [innerHTML]="heading"></h1>
-    <select id="Staff" [(ngModel)]="staffType" [ngModelOptions]="{standalone: true}"><br><br>
+    <select id="Staff" [(ngModel)]="staffType" [ngModelOptions]="{standalone: true}"
+      [disabled]="!selectEditable"><br><br>
       <option value="admin">Administrative Staff</option>
       <option value="teaching">Teaching Staff</option>
       <option value="support">Supporting Staff</option>
     </select>
+    <br><br>
+    <div *ngIf="deleteBtnVisibility == true">
+      <button class="delete" (click)="DeleteStaff()">Delete</button>
+    </div>
   </div>
   <hr>
   <br>
   <form>
     <label>Employee Id :</label><br>
-    <input type="text" id="IEmpId" [(ngModel)]="EmpId" [ngModelOptions]="{standalone :true}" /><br><br>
+    <input type="text" id="IEmpId" [(ngModel)]="EmpId" [ngModelOptions]="{standalone :true}"
+      [disabled]="!selectEditable" /><br><br>
     <label>Name :</label><br>
     <input type="text" id="IName" [(ngModel)]="Name" [ngModelOptions]="{standalone :true}" /><br><br>
     <label>Email :</label><br>
@@ -36,8 +42,6 @@
     <div class="vertical-center">
       <button type="button" (click)="getValues()" id="registerSubmit" class="registerSubmit"
         [innerHTML]="btntext"></button><br>
-      <!-- <button type="button" (click)="EditStaff()" id="registerEdit" style="visibility: hidden;"
-        class="registerEdit">Edit</button> -->
     </div>
 
   </form>

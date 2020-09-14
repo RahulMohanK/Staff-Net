@@ -22,9 +22,11 @@ export class RegisterComponent implements OnInit {
     }
     else {
       this.populateForm();
-      console.log("else " + this.empIdCheck);
+      //  console.log("else " + this.empIdCheck);
       this.heading = "EDIT";
       this.btntext = "Edit";
+      this.deleteBtnVisibility = true;
+      this.selectEditable = false;
     }
   }
 
@@ -43,7 +45,8 @@ export class RegisterComponent implements OnInit {
   editStaff: Staff;
   empIdCheck: string;
   btntext: string;
-
+  deleteBtnVisibility: boolean = false;
+  selectEditable: boolean = true;
 
   getValues(): void {
     if (this.staffType == 'admin') {
@@ -67,21 +70,32 @@ export class RegisterComponent implements OnInit {
       console.log(this.staff);
     }
     if (this.heading == "REGISTER") {
-      this.addStaff();
+      this.AddStaff();
     }
     else {
       this.EditStaff();
     }
   }
 
-  addStaff(): void {
-    this.apiService.addStaff(this.staff).subscribe();
-    this.router.navigate(['/load']);
+  AddStaff(): void {
+    this.apiService.addStaff(this.staff).subscribe(_ => {
+      this.router.navigate(['/load']);
+    });
+
   }
 
   EditStaff(): void {
-    this.apiService.editStaff(this.empIdCheck, this.staff).subscribe();
-    this.router.navigate(['/load']);
+    this.apiService.editStaff(this.empIdCheck, this.staff).subscribe(_ => {
+      this.router.navigate(['/load']);
+    });
+
+  }
+
+  DeleteStaff(): void {
+    this.apiService.deleteStaff(this.empIdCheck).subscribe(_ => {
+      this.router.navigate(['/load']);
+    });
+
   }
 
   checkParam(): boolean {
@@ -114,7 +128,5 @@ export class RegisterComponent implements OnInit {
       this.Dob = editStaff.dob;
     });
   }
-
-
 
 }
