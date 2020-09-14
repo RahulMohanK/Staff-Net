@@ -26,14 +26,6 @@ export class ApiService {
 
       );
   }
-  addStaff(staff: any): Observable<any> {
-    return this.http.post<any>(this.apiurl, staff, this.httpOptions)
-      .pipe(
-        tap(val => console.log('added')),
-        catchError(this.handleError<any>('add staff'))
-      );
-  }
-
   getStaff(empId: string): Observable<Staff> {
     console.log('service ' + empId);
     const url = `${this.apiurl}${empId}`;
@@ -41,6 +33,14 @@ export class ApiService {
       .pipe(
         tap(_ => console.log('fetched single staff')),
         catchError(this.handleError<Staff>('get single Staff'))
+      );
+  }
+
+  addStaff(staff: any): Observable<any> {
+    return this.http.post<any>(this.apiurl, staff, this.httpOptions)
+      .pipe(
+        tap(val => console.log('added')),
+        catchError(this.handleError<any>('add staff'))
       );
   }
 

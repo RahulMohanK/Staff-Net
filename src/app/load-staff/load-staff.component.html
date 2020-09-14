@@ -28,7 +28,7 @@
       </tr>
     </thead>
 
-    <tbody *ngIf="type == 'admin' ">
+    <tbody *ngIf="staffs">
       <tr *ngFor="let val of staffs ; let i = index " (click)="getLog(val.empId)">
         <td>{{i+1}}</td>
         <td>{{val.empId}}</td>
@@ -36,29 +36,9 @@
         <td>{{val.phone}}</td>
         <td>{{val.email}}</td>
         <td>{{val.dob | date}}</td>
-        <td>{{val.administrativeStaff[0].designation}}</td>
-      </tr>
-    </tbody>
-    <tbody *ngIf="type == 'teaching'">
-      <tr *ngFor="let val1 of staffs ; let i = index " (click)="getLog(val1.empId)">
-        <td>{{i+1}}</td>
-        <td>{{val1.empId}}</td>
-        <td>{{val1.name}}</td>
-        <td>{{val1.phone}}</td>
-        <td>{{val1.email}}</td>
-        <td>{{val1.dob |  date}}</td>
-        <td>{{val1.teachingStaff[0].subject}}</td>
-      </tr>
-    </tbody>
-    <tbody *ngIf=" type=='support'">
-      <tr *ngFor=" let val1 of staffs ; let i=index " (click)="getLog(val1.empId)">
-        <td>{{i+1}}</td>
-        <td>{{val1.empId}}</td>
-        <td>{{val1.name}}</td>
-        <td>{{val1.phone}}</td>
-        <td>{{val1.email}}</td>
-        <td>{{val1.dob |  date}}</td>
-        <td>{{val1.supportingStaff[0].department}}</td>
+        <td *ngIf="type == 'admin'">{{val.administrativeStaff[0].designation}}</td>
+        <td *ngIf="type == 'teaching'">{{val.teachingStaff[0].subject}}</td>
+        <td *ngIf=" type=='support'">{{val.supportingStaff[0].department}}</td>
       </tr>
     </tbody>
   </table>

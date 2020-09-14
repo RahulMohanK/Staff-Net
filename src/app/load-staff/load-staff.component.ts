@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Staff } from '../../model/staff';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -12,6 +12,15 @@ import { formatDate } from '@angular/common';
 })
 export class LoadStaffComponent implements OnInit {
 
+  getstaff$;
+
+  staffs: Staff[];
+  staff: Staff;
+  staffType: string;
+  headers = ["Sl.No", "EmpId", "Name", "Phone", "Email", "Dob", "Designation"];
+  staffHeading: string;
+  type: string;
+
   constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
@@ -22,15 +31,14 @@ export class LoadStaffComponent implements OnInit {
     console.log('init');
   }
 
-  staffs: Staff[];
-  staff: Staff;
-  staffType: string;
-  headers = ["Sl.No", "EmpId", "Name", "Phone", "Email", "Dob", "Designation"];
-  staffHeading: string;
-  type: string;
+  ngOnDestroy(): void {
+    this.getstaff$.unsubscribe();
+  }
+
+
 
   loadStaffs(staffType: string): void {
-    this.apiService.getStaffs(staffType).subscribe(staffs => this.staffs = staffs);
+    this.getstaff$ = this.apiService.getStaffs(staffType).subscribe(staffs => this.staffs = staffs);
   }
 
   getStaffType(type: string): void {
@@ -42,8 +50,6 @@ export class LoadStaffComponent implements OnInit {
       this.staffHeading = 'Administrative Staff';
     }
     if (type == 'teaching') {
-
-
       this.headers = ["Sl.No", "EmpId", "Name", "Phone", "Email", "Dob", "Subject"];
       this.staffHeading = 'Teaching Staff';
       // console.log(this.staffs);
@@ -52,7 +58,6 @@ export class LoadStaffComponent implements OnInit {
 
       this.headers = ["Sl.No", "EmpId", "Name", "Phone", "Email", "Dob", "Department"];
       this.staffHeading = 'Supporting Staff';
-
     }
     this.loadStaffs(type);
   }

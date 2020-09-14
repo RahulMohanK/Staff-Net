@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from '../api.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
@@ -12,23 +12,9 @@ import { Observable } from 'rxjs';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private location: Location, private router: Router) { }
-
-  ngOnInit(): void {
-    if (!this.checkParam()) {
-      this.staffType = 'admin';
-      this.heading = "REGISTER";
-      this.btntext = "Submit";
-    }
-    else {
-      this.populateForm();
-      //  console.log("else " + this.empIdCheck);
-      this.heading = "EDIT";
-      this.btntext = "Edit";
-      this.deleteBtnVisibility = true;
-      this.selectEditable = false;
-    }
-  }
+  addStaff$;
+  editStaff$;
+  deleteStaff$;
 
   staffType: string;
   EmpId: string;
@@ -48,22 +34,54 @@ export class RegisterComponent implements OnInit {
   deleteBtnVisibility: boolean = false;
   selectEditable: boolean = true;
 
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private location: Location, private router: Router) { }
+
+  ngOnInit(): void {
+    if (!this.checkParam()) {
+      this.staffType = 'admin';
+      this.heading = "REGISTER";
+      this.btntext = "Submit";
+    }
+    else {
+      this.populateForm();
+      //  console.log("else " + this.empIdCheck);
+      this.heading = "EDIT";
+      this.btntext = "Edit";
+      this.deleteBtnVisibility = true;
+      this.selectEditable = false;
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.addStaff$ != undefined) {
+      this.addStaff$.unsubscribe();
+    }
+    if (this.editStaff$ != undefined) {
+      this.editStaff$.unsubscribe();
+    }
+    if (this.deleteStaff$ != undefined) {
+      this.deleteStaff$.unsubscribe();
+    }
+  }
+
+
+
   AddStaff(): void {
-    this.apiService.addStaff(this.staff).subscribe(_ => {
+    this.addStaff$ = this.apiService.addStaff(this.staff).subscribe(_ => {
       this.router.navigate(['/load']);
     });
 
   }
 
   EditStaff(): void {
-    this.apiService.editStaff(this.empIdCheck, this.staff).subscribe(_ => {
+    this.editStaff$ = this.apiService.editStaff(this.empIdCheck, this.staff).subscribe(_ => {
       this.router.navigate(['/load']);
     });
 
   }
 
   DeleteStaff(): void {
-    this.apiService.deleteStaff(this.empIdCheck).subscribe(_ => {
+    this.deleteStaff$ = this.apiService.deleteStaff(this.empIdCheck).subscribe(_ => {
       this.router.navigate(['/load']);
     });
 
