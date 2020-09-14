@@ -34,6 +34,33 @@ export class ApiService {
       );
   }
 
+  getStaff(empId: string): Observable<Staff> {
+    console.log('service ' + empId);
+    const url = `${this.apiurl}${empId}`;
+    return this.http.get<Staff>(url)
+      .pipe(
+        tap(_ => console.log('fetched single staff')),
+        catchError(this.handleError<Staff>('get single Staff'))
+      );
+  }
+
+  editStaff(empId: string, staff: any): Observable<any> {
+    const url = `${this.apiurl}${empId}`;
+    return this.http.put<any>(url, staff, this.httpOptions)
+      .pipe(
+        tap(_ => console.log('staff edited')),
+        catchError(this.handleError<any>('edit staff'))
+      );
+  }
+
+  deleteStaff(empId: string): Observable<Staff> {
+    const url = `${this.apiurl}${empId}`;
+    return this.http.delete<Staff>(url)
+      .pipe(
+        tap(_ => console.log('deleted staff')),
+        catchError(this.handleError<Staff>('deletion'))
+      );
+  }
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

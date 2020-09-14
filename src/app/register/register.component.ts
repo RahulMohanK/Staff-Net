@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
+import { Staff } from '../../model/staff';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +15,19 @@ export class RegisterComponent implements OnInit {
   constructor(private apiService: ApiService, private route: ActivatedRoute, private location: Location, private router: Router) { }
 
   ngOnInit(): void {
-    this.staffType = 'admin'
+    if (!this.checkParam()) {
+      this.staffType = 'admin';
+      this.heading = "REGISTER";
+      this.btntext = "Submit";
+    }
+    else {
+      this.populateForm();
+      console.log("else " + this.empIdCheck);
+      this.heading = "EDIT";
+      this.btntext = "Edit";
+    }
   }
+
   staffType: string;
   EmpId: string;
   Name: string;
@@ -26,6 +39,11 @@ export class RegisterComponent implements OnInit {
   Department: string;
   staff: any;
 
+  heading: string;
+  editStaff: Staff;
+  empIdCheck: string;
+  btntext: string;
+
 
   getValues(): void {
     if (this.staffType == 'admin') {
@@ -34,15 +52,12 @@ export class RegisterComponent implements OnInit {
         dob: this.Dob, staffType: 0, administrativeStaff: [{ designation: this.Designation }]
       }
       console.log(this.staff);
-      this.addStaff();
     }
     if (this.staffType == 'teaching') {
       this.staff = {
         empId: this.EmpId, name: this.Name, email: this.Email, phone: this.Phone,
         dob: this.Dob, staffType: 1, teachingStaff: [{ subject: this.Subject }]
       }
-      console.log(this.staff);
-      this.addStaff();
     }
     if (this.staffType == 'support') {
       this.staff = {
@@ -50,14 +65,56 @@ export class RegisterComponent implements OnInit {
         dob: this.Dob, staffType: 2, supportingStaff: [{ department: this.Department }]
       }
       console.log(this.staff);
+    }
+    if (this.heading == "REGISTER") {
       this.addStaff();
     }
+    else {
+      this.EditStaff();
+    }
   }
-  EditStaff(): void {
 
-  }
   addStaff(): void {
     this.apiService.addStaff(this.staff).subscribe();
     this.router.navigate(['/load']);
   }
+
+  EditStaff(): void {
+    this.apiService.editStaff(this.empIdCheck, this.staff).subscribe();
+    this.router.navigate(['/load']);
+  }
+
+  checkParam(): boolean {
+    this.empIdCheck = this.route.snapshot.paramMap.get('empId');
+    if (this.empIdCheck == null) {
+      return false;
+    }
+    return true;
+  }
+
+  populateForm(): void {
+    this.apiService.getStaff(this.empIdCheck).subscribe(editStaff => {
+      this.editStaff = editStaff;
+      if (editStaff.staffType == 0) {
+        this.staffType = 'admin';
+        this.Designation = editStaff.administrativeStaff[0].designation;
+      }
+      else if (editStaff.staffType == 1) {
+        this.staffType = 'teaching';
+        this.Subject = editStaff.teachingStaff[0].subject;
+      }
+      else {
+        this.staffType = 'support';
+        this.Department = editStaff.supportingStaff[0].department;
+      }
+      this.EmpId = editStaff.empId;
+      this.Name = editStaff.name;
+      this.Email = editStaff.email;
+      this.Phone = editStaff.phone;
+      this.Dob = editStaff.dob;
+    });
+  }
+
+
+
 }

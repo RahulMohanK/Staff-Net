@@ -8,7 +8,8 @@ import { MenuComponent } from './menu/menu.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadStaffComponent } from './load-staff/load-staff.component';
 import { RegisterComponent } from './register/register.component';
-import { StaffSpecificDirective } from './staff-specific.directive'
+import { StaffSpecificDirective } from './staff-specific.directive';
+import { NotificationComponent } from './notification/notification.component'
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { StaffSpecificDirective } from './staff-specific.directive'
     MenuComponent,
     LoadStaffComponent,
     RegisterComponent,
-    StaffSpecificDirective
+    StaffSpecificDirective,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,

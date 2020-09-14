@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Staff } from '../../model/staff';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-load-staff',
@@ -10,7 +11,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoadStaffComponent implements OnInit {
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.staffHeading = 'Administrative Staff';
@@ -56,6 +57,12 @@ export class LoadStaffComponent implements OnInit {
 
     }
     this.loadStaffs(type);
+  }
+  getLog(EmpId: string): void {
+
+
+    this.router.navigate(['/register/' + EmpId]);
+    console.log("clicked" + EmpId);
   }
 
 }

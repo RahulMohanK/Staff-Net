@@ -29,7 +29,7 @@
     </thead>
 
     <tbody *ngIf="type == 'admin' ">
-      <tr *ngFor="let val of staffs ; let i = index ">
+      <tr *ngFor="let val of staffs ; let i = index " (click)="getLog(val.empId)">
         <td>{{i+1}}</td>
         <td>{{val.empId}}</td>
         <td>{{val.name}}</td>
@@ -40,7 +40,7 @@
       </tr>
     </tbody>
     <tbody *ngIf="type == 'teaching'">
-      <tr *ngFor="let val1 of staffs ; let i = index ">
+      <tr *ngFor="let val1 of staffs ; let i = index " (click)="getLog(val1.empId)">
         <td>{{i+1}}</td>
         <td>{{val1.empId}}</td>
         <td>{{val1.name}}</td>
@@ -50,8 +50,8 @@
         <td>{{val1.teachingStaff[0].subject}}</td>
       </tr>
     </tbody>
-    <tbody *ngIf="type == 'support'">
-      <tr *ngFor="let val1 of staffs ; let i = index ">
+    <tbody *ngIf=" type=='support'">
+      <tr *ngFor=" let val1 of staffs ; let i=index " (click)="getLog(val1.empId)">
         <td>{{i+1}}</td>
         <td>{{val1.empId}}</td>
         <td>{{val1.name}}</td>
@@ -63,3 +63,4 @@
     </tbody>
   </table>
 </div>
+<app-notification></app-notification>

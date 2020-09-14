@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 const routes: Routes = [
   { path: 'load', component: LoadStaffComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'register/:empId', component: RegisterComponent },
   { path: '', redirectTo: '/load', pathMatch: 'full' }
 
 ];

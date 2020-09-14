@@ -1,6 +1,6 @@
-<div class="main">
-  <div [style.align]>
-    <h1 id="hReg">REGISTER</h1>
+<div class="main" *ngIf="staffType">
+  <div align="center">
+    <h1 [innerHTML]="heading"></h1>
     <select id="Staff" [(ngModel)]="staffType" [ngModelOptions]="{standalone: true}"><br><br>
       <option value="admin">Administrative Staff</option>
       <option value="teaching">Teaching Staff</option>
@@ -34,9 +34,10 @@
         [ngModelOptions]="{standalone :true}" />
     </div>
     <div class="vertical-center">
-      <button type="button" (click)="getValues()" id="registerSubmit" class="registerSubmit">Submit</button><br>
-      <button type="button" (click)="EditStaff()" id="registerEdit" style="visibility: hidden;"
-        class="registerEdit">Edit</button>
+      <button type="button" (click)="getValues()" id="registerSubmit" class="registerSubmit"
+        [innerHTML]="btntext"></button><br>
+      <!-- <button type="button" (click)="EditStaff()" id="registerEdit" style="visibility: hidden;"
+        class="registerEdit">Edit</button> -->
     </div>
 
   </form>
